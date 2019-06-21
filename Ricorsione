@@ -1,0 +1,70 @@
+INPUT : Set di oggetti esami PARTENZA
+INPUT : Numero di crediti N
+
+OUTPUT : Sottoinsieme di esami di partenza, 
+per cui: 
+   - somma Esame.crediti = N;
+   - media Esame.voto MAX
+   
+   
+   Generare tutti i possibili sottoinsiemi di PARTENZA
+   Non devo trattarli in ORDINE, l'ordine non conta
+    
+  # Approccio 1:
+  
+  genero l'insieme decidendo, corso per corso se esso fa parte dell'insieme.
+  
+    Livello ricorsione : corrisponde a quale corso sto decidendo se includere o meno 
+      all'interno della soluzione.
+      
+      La soluzione parziale è un sotto insieme che può includere o non includere i corsi 
+      tra il livello 0 e L-1
+      
+   Gestione del sottoproblema è decidere se inserire l'esame L
+   Di fatto genero sottoproblemi in cui :
+   
+   1. Sotto-problema = soluzione parziale (non aggiungo)
+   
+   2. Sotto-problema = soluzione parziale + {L}
+   
+   Casi terminali:
+   
+   1. L=MAX; (non ci sono più corsi)
+      
+      se somma crediti:
+      
+      - == N calcola media; =>è migliore della miglior media conosciuta? se si la sovrascrivo!
+                                                                         se no return
+      - != N scarta; => return 
+   
+   2. se somma crediti = N
+       
+       - valuta la media e esci;  =>è migliore della miglior media conosciuta? se si la sovrascrivo!
+                                                                               se no return
+   3. se somma crediti > N
+    
+       - esci; => return
+       
+    di fino possiamo considerare gli esami più bassi della media (mi abbassano la media);   
+     
+ 
+ COMPLESSITA' : 2^L (L = NUMERO DI ESAMI)
+ 
+ 
+ #Approccio 2 : ad ogni livello decido quale corso aggiungere      
+    non si scandisce il set di corsi
+    
+    al livello L ci saranno L corsi!     
+    Ad ogni livello AGGIUNGO SEMPRE UN CORSO
+    
+    Generare un sottoproblema
+    
+    Sottoproblema = parziale + i 
+    
+ COMPLESSITA' : L!   
+ 
+ ACCORTEZZA : Scelgo solo delle sequenze CRESCENTI in questo modo la complessità
+ 2^L
+ 
+   
+   
